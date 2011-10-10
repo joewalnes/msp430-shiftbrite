@@ -15,7 +15,7 @@
  * P1.2    LI (Latch In)
  * P1.3    DI (Data In)
  *
- * The ShiftBrite V+ and Ground should be connected to a DC 5-15V power supply.
+ * The ShiftBrite V+ and Ground should be connected to a DC 5.5-9V power supply.
  * The Ground should be connected to the MSP430 Ground.
  *
  * Joe Walnes <joe@walnes.com>
