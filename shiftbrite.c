@@ -1,3 +1,7 @@
+/**
+ * Joe Walnes <joe@walnes.com>
+ */
+
 #include <msp430x20x2.h>
 #include "shiftbrite.h"
 
@@ -19,6 +23,14 @@ static inline void shiftbit(shiftbrite* sb, uint16_t val) {
     P1OUT &= ~(sb->data_pin);
   }
   pulse(sb->clock_pin);
+}
+
+void shiftbrite_enable(shiftbrite* sb) {
+  P1OUT |= sb->enable_pin;
+}
+
+void shiftbrite_disable(shiftbrite* sb) {
+  P1OUT &= ~(sb->enable_pin);
 }
 
 void shiftbrite_rgb(shiftbrite* sb,
