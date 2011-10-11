@@ -19,4 +19,4 @@ clean:
 	rm -fr *.elf *.lst *.o
 
 install: $(PROG).elf
-	mspdebug rf2500 "prog $(PROG).elf
+	mspdebug rf2500 "prog $(PROG).elf"
