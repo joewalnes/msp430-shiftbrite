@@ -9,6 +9,7 @@ void shiftbrite_init(shiftbrite *sb) {
   P1DIR |= sb->data_pin;
   P1DIR |= sb->clock_pin;
   P1DIR |= sb->latch_pin;
+  P1DIR |= sb->enable_pin;
 }
 
 static inline void pulse(char pin) {
@@ -26,11 +27,11 @@ static inline void shiftbit(shiftbrite* sb, uint16_t val) {
 }
 
 void shiftbrite_enable(shiftbrite* sb) {
-  P1OUT |= sb->enable_pin;
+  P1OUT &= ~(sb->enable_pin);
 }
 
 void shiftbrite_disable(shiftbrite* sb) {
-  P1OUT &= ~(sb->enable_pin);
+  P1OUT |= sb->enable_pin;
 }
 
 void shiftbrite_rgb(shiftbrite* sb,
@@ -38,7 +39,6 @@ void shiftbrite_rgb(shiftbrite* sb,
                     uint16_t green,
                     uint16_t blue) {
   int i;
-
   for (i = 0; i < 2; i++)  {
     shiftbit(sb, 0);
   }
@@ -51,8 +51,9 @@ void shiftbrite_rgb(shiftbrite* sb,
   for (i = 9; i >= 0; i--) {
     shiftbit(sb, green & (1 << i));
   }
-
-  pulse(sb->latch_pin);
 }
 
+void shiftbrite_commit(shiftbrite* sb) {
+  pulse(sb->latch_pin);
+}
 

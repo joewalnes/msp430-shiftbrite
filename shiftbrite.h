@@ -20,3 +20,15 @@ void shiftbrite_rgb(shiftbrite* sb,
                     uint16_t red,
                     uint16_t green,
                     uint16_t blue);
+
+void shiftbrite_commit(shiftbrite* sb);
+
+static inline void shiftbrite_quick_rgb(shiftbrite* sb,
+                                        uint16_t red,
+                                        uint16_t green,
+                                        uint16_t blue) {
+  shiftbrite_init(sb);
+  shiftbrite_enable(sb);
+  shiftbrite_rgb(sb, red, green, blue);
+  shiftbrite_commit(sb);
+}
