@@ -10,10 +10,10 @@
  *
  * MSP430  ShiftBrite
  * ------  ----------
- * P1.0    EI (Enable In)
- * P1.1    CI (Clock In)
- * P1.2    LI (Latch In)
- * P1.3    DI (Data In)
+ * P1.4    DI (Data In)
+ * P1.5    LI (Latch In)
+ * P1.6    EI (Enable In)
+ * P1.7    CI (Clock In)
  *
  * The ShiftBrite V+ and Ground should be connected to a DC 5.5-9V power supply.
  * The Ground should be connected to the MSP430 Ground.
@@ -24,16 +24,13 @@ int main(void) {
   WDTCTL = WDTPW + WDTHOLD; // Stop watchdog timer. Standard MSP430 setup.
 
   shiftbrite sb;
-  sb.enable_pin = BIT0; // Pin 1.0
-  sb.clock_pin  = BIT1; // Pin 1.1
-  sb.latch_pin  = BIT2; // Pin 1.2
-  sb.data_pin   = BIT3; // Pin 1.3
+  sb.data_pin   = BIT4; // Pin 1.4
+  sb.latch_pin  = BIT5; // Pin 1.5
+  sb.enable_pin = BIT6; // Pin 1.6
+  sb.clock_pin  = BIT7; // Pin 1.7
 
-  shiftbrite_init(&sb);
-  shiftbrite_enable(&sb);
+  shiftbrite_quick_rgb(&sb, 0, 1023, 0); // Green
 
-  shiftbrite_rgb(&sb, 1023, 0, 0); // Green
-  //shiftbrite_rgb(&sb, 0, 1023, 0); // Red
-  //shiftbrite_rgb(&sb, 0, 0, 1023); // Blue
+  for(;;) { /* spin forever */ }
 }
  

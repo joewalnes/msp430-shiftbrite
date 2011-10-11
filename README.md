@@ -14,15 +14,15 @@ Connect the ground and V+ pins to your power supply. If you want to
 power the ShiftBrite from a separate power source to the MSP430, that's
 fine, so long as you connect the grounds together.
 
-Connect the ShiftBrite 'Enable', 'Clock', 'Latch' and 'Data' pins to
-free pins on the MSP430. Assuming these are connected to pins 1.0, 1.1,
-1.2 and 1.3 respectively. Initialize the library:
+Connect the ShiftBrite 'Data In', 'Latch In', 'Clock In' and 'Enable' pins to
+free pins on the MSP430. Assuming these are connected to pins 1.4, 1.5,
+1.6 and 1.7 respectively. Initialize the library:
 
     shiftbrite sb;
-    sb.enable_pin = BIT0; // Pin 1.0
-    sb.clock_pin  = BIT1; // Pin 1.1
-    sb.latch_pin  = BIT2; // Pin 1.2
-    sb.data_pin   = BIT3; // Pin 1.3
+    sb.data_pin   = BIT4; // Pin 1.4
+    sb.latch_pin  = BIT5; // Pin 1.5
+    sb.enable_pin = BIT6; // Pin 1.6
+    sb.clock_pin  = BIT7; // Pin 1.7
     shiftbrite_init(&sb);
 
 To enable or disable the LED:
