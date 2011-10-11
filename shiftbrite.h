@@ -11,7 +11,23 @@ typedef struct {
   char enable_pin;
 } shiftbrite;
 
+typedef enum {
+  CLOCK_800MHZ,
+  CLOCK_400MHZ,
+  CLOCK_EXTERNAL,
+  CLOCK_200MHZ
+} shiftbrite_clock;
+
+static const uint8_t MAX_CORRECTION = 127;
+static const uint16_t MAX_COLOR_VALUE = 1023;
+
 void shiftbrite_init(shiftbrite *sb);
+
+void shiftbrite_configure(shiftbrite *sb,
+                          uint8_t red_correction,
+                          uint8_t green_correction,
+                          uint8_t blue_correction,
+                          shiftbrite_clock clock);
 
 void shiftbrite_enable(shiftbrite *sb);
 void shiftbrite_disable(shiftbrite *sb);
