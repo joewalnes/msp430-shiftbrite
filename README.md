@@ -57,11 +57,15 @@ You try soldering one of these ICs - it's really tricky!
 **Q:** Can't I just drive an RGB LED directly from the MSP430? What's
 the point of the ShiftBrite?
 
-**A:** Sure you can. But you have to configure timers for
-[PWM](http://en.wikipedia.org/wiki/Pulse-width_modulation) and you'll
-probably want to separate the power supply from the MSP430 (which
-involves a power regulator, some transistors, resistors and capacitors).
-The ShiftBrite (well, the Allegro A6281) takes care of that for you.
+**A:** Sure you can. But you'll need some resistors and have to handle
+the [PWM](http://en.wikipedia.org/wiki/Pulse-width_modulation) timers 
+yourself. Joby Taffey has a good tutorial on building a
+[Launchpad RGB Lamp](http://blog.hodgepig.org/2010/09/30/jam-jar-lamp/)
+using the raw components. The benefit you get from the ShiftBrite (well,
+the Allegro A6281) is you can easily drive brighter LEDs from a separate
+power source (which would involve a power regulator, transistors,
+resistors, capacitors, etc) and chains of many indepenently controlled
+LEDs from only 4 pins.
 
 **Q:** Do I have to use the enable pin and `shiftbrite_enable()` call?
 
