@@ -71,7 +71,7 @@ void shiftbrite_rgb(shiftbrite* sb,
   shift_10bit_value(sb, green);
 }
 
-void shiftbrite_commit(shiftbrite* sb) {
+void shiftbrite_latch(shiftbrite* sb) {
   pulse(sb->latch_pin);
 }
 
