@@ -2,7 +2,9 @@
  * Protocol defined in Allegro A6281 datasheet:
  * http://www.allegromicro.com/en/Products/Part_Numbers/6281/6281.pdf
  *
- * Joe Walnes <joe@walnes.com>
+ * See shiftbrite.h for API docs.
+ *
+ * 2011, Joe Walnes <joe@walnes.com>
  */
 
 #include <msp430x20x2.h>
