@@ -156,30 +156,3 @@ void shiftbrite_rgb(shiftbrite* sb,
  */
 void shiftbrite_latch(shiftbrite* sb);
 
-/**
- * Convenience function for the common case of just wanting to setup
- * a single ShiftBrite and update the color.
- *
- * This will initialize, enable, set the color and latch.
- *
- * Usage:
- *
- *   // Setup pins
- *   shiftbrite sb;
- *   sb.data_pin   = BIT4; // Pin 1.4
- *   sb.clock_pin  = BIT5; // Pin 1.5
- *   sb.latch_pin  = BIT6; // Pin 1.6
- *   sb.enable_pin = BIT7; // Pin 1.7
- *
- *   // Light up with RGB values
- *   shiftbrite_quick_rgb(&sb, 511, 1023, 0);
- */
-static inline void shiftbrite_quick_rgb(shiftbrite* sb,
-                                        uint16_t red,
-                                        uint16_t green,
-                                        uint16_t blue) {
-  shiftbrite_init(sb);
-  shiftbrite_enable(sb);
-  shiftbrite_rgb(sb, red, green, blue);
-  shiftbrite_latch(sb);
-}
