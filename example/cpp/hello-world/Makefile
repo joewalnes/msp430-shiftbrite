@@ -1,10 +1,12 @@
 .PHONY: all clean install
 
 CC = msp430-gcc
-CFLAGS = -Os -Wall -g -mmcu=msp430x2012 -I../..
+CXX = msp430-g++
+CFLAGS = -Os -Wall -g -mmcu=msp430x2012 -I../../..
+CXXFLAGS = $(CFLAGS)
 PROG=main
 
-OBJS=$(PROG).o ../../shiftbrite.o
+OBJS=$(PROG).o ../../../shiftbrite.o
 
 all: $(PROG).elf $(PROG).lst
 	msp430-size $(PROG).elf

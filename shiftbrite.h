@@ -73,6 +73,10 @@
  * 2011, Joe Walnes <joe@walnes.com>
  */
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct {
   char data_pin;
   char clock_pin;
@@ -156,3 +160,70 @@ void shiftbrite_rgb(shiftbrite* sb,
  */
 void shiftbrite_latch(shiftbrite* sb);
 
+#ifdef __cplusplus
+} // extern "C"
+
+// C++ only....
+
+/**
+ * C++ wrapper to ShiftBrite C library.
+ * Adds no new functionality, just makes it more C++y.
+ */
+class ShiftBrite {
+
+public:
+
+  shiftbrite sb;
+
+  ShiftBrite(shiftbrite sb) : sb(sb) {
+    shiftbrite_init(&sb);
+  }
+
+  ShiftBrite(char data_pin,
+             char clock_pin,
+             char latch_pin,
+             char enable_pin) {
+    sb.data_pin   = data_pin;
+    sb.clock_pin  = clock_pin;
+    sb.latch_pin  = latch_pin;
+    sb.enable_pin = enable_pin;
+    shiftbrite_init(&sb);
+  }
+
+  /** See shiftbrite_configure() */
+  void configure(uint8_t red_correction,
+                 uint8_t green_correction,
+                 uint8_t blue_correction,
+                 shiftbrite_clock clock = CLOCK_800MHZ) {
+    shiftbrite_configure(&sb,
+                         red_correction,
+                         green_correction,
+                         blue_correction,
+                         clock);
+  }
+
+  /** See shiftbrite_enable() */
+  void enable() {
+    shiftbrite_enable(&sb);
+  }
+
+  /** See shiftbrite_disable() */
+  void disable() {
+    shiftbrite_disable(&sb);
+  }
+
+  /** See shiftbrite_rgb() */
+  void rgb(uint16_t red,
+           uint16_t green,
+           uint16_t blue) {
+    shiftbrite_rgb(&sb, red, green, blue);
+  }
+
+  /** See shiftbrite_latch() */
+  void latch() {
+    shiftbrite_latch(&sb);
+  }
+
+};
+
+#endif

@@ -80,6 +80,9 @@ Other things you should know:
 
 *   Plenty of docs in the header file, and check out the examples.
 
+*   If you prefer C++, there's also a C++ wrapper to the C API.
+    See header and examples.
+
 Questions
 ---------
 
