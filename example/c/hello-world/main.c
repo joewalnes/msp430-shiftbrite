@@ -20,16 +20,18 @@
  *
  * Joe Walnes <joe@walnes.com>
  */
+
+shiftbrite sb;
+
 int main(void) {
   WDTCTL = WDTPW + WDTHOLD; // Stop watchdog timer. Standard MSP430 setup.
 
   // Configure MSP430 pins
-  shiftbrite sb;
-  sb.data_pin   = BIT4; // Pin 1.4
-  sb.latch_pin  = BIT5; // Pin 1.5
-  sb.enable_pin = BIT6; // Pin 1.6
-  sb.clock_pin  = BIT7; // Pin 1.7
-  shiftbrite_init(&sb);
+  shiftbrite_init(&sb,
+                  BIT4,  // Data pin   : 1.4
+                  BIT5,  // Latch pin  : 1.5
+                  BIT6,  // Enable pin : 1.6
+                  BIT7); // Clock pin  : 1.7
 
   // At startup, the module is disabled. Enable it.
   shiftbrite_enable(&sb);
@@ -46,4 +48,4 @@ int main(void) {
 
   for(;;) { /* spin forever */ }
 }
- 
+

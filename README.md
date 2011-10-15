@@ -32,7 +32,19 @@ Multiple ShiftBrites can be chained together by connecting the
 Usage
 -----
 
-1. Create a `shiftbrite` struct, set which pins the first
+1. Allocate a global `shiftbrite` struct.
+
+    shiftbrite sb;
+
+2. At startup, call `shiftbrite_init()` function, passing in which pins the first  module in the chain is connected to.
+
+    shiftbrite_init(&sb,
+                    BIT4,  // Data pin   : 1.4
+                    BIT5,  // Latch pin  : 1.5
+                    BIT6,  // Enable pin : 1.6
+                    BIT7); // Clock pin  : 1.7
+
+2. Create a `shiftbrite` struct, set which pins the first
 module in the chain is connected to and call `shiftbrite_init()`.
 
     shiftbrite sb;
@@ -42,11 +54,11 @@ module in the chain is connected to and call `shiftbrite_init()`.
     sb.clock_pin  = BIT7; // Pin 1.7
     shiftbrite_init(&sb); // Setup MSP430 pins
 
-2. Enable the ShiftBrite:
+3. Enable the ShiftBrite:
 
     shiftbrite_enable(&sb);
 
-3. For each module in the chain, call `shiftbrite_rgb()`, to
+4. For each module in the chain, call `shiftbrite_rgb()`, to
 load the data into the module. Each call will shift all the
 values to the next module in the chain (a FIFO queue), so you
 need to load the values of the furthest module first.
@@ -60,13 +72,13 @@ The RGB values should be in range 0-1023.
     shiftbrite_rgb(&sb, 0, 1023, 0); // Set middle to GREEN
     shiftbrite_rgb(&sb, 0, 0, 1023); // Set closest to BLUE
 
-4. 'Latch' the data. This sends a signal to each ShiftBrite
+5. 'Latch' the data. This sends a signal to each ShiftBrite
 that the data has been fully loaded and they should update
 the LEDs to the new values.
 
     shiftbrite_latch(&sb);
 
-5. Yay! Light!
+6. Yay! Light!
 
 Other things you should know:
 

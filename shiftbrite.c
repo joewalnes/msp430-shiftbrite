@@ -16,7 +16,15 @@ static inline void shift_zeros(shiftbrite* sb, uint8_t count);
 static inline void shift_10bit_value(shiftbrite* sb, uint16_t value);
 static inline void shift_7bit_value(shiftbrite* sb, uint8_t value);
 
-void shiftbrite_init(shiftbrite *sb) {
+void shiftbrite_init(shiftbrite *sb,
+                     char data_pin,
+                     char latch_pin,
+                     char enable_pin,
+                     char clock_pin) {
+  sb->data_pin   = data_pin;
+  sb->latch_pin  = latch_pin;
+  sb->enable_pin = enable_pin;
+  sb->clock_pin  = clock_pin;
   P1DIR |= sb->data_pin;
   P1DIR |= sb->clock_pin;
   P1DIR |= sb->latch_pin;

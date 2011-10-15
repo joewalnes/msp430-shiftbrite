@@ -24,21 +24,24 @@
  *
  * Usage:
  *
- *   1. Create a 'shiftbrite' struct, set which pins the first
- *   module in the chain is connected to and call 'shiftbrite_init()'.
+ *   1. Allocate a global 'shiftbrite' struct.
  *
  *     shiftbrite sb;
- *     sb.data_pin   = BIT4; // Pin 1.4
- *     sb.latch_pin  = BIT5; // Pin 1.5
- *     sb.enable_pin = BIT6; // Pin 1.6
- *     sb.clock_pin  = BIT7; // Pin 1.7
- *     shiftbrite_init(&sb); // Setup MSP430 pins
  *
- *   2. Enable the ShiftBrite:
+ *   2. At startup, call 'shiftbrite_init()' function, passing in
+ *   which pins the first  module in the chain is connected to.
+ *
+ *     shiftbrite_init(&sb,
+ *                     BIT4,  // Data pin   : 1.4
+ *                     BIT5,  // Latch pin  : 1.5
+ *                     BIT6,  // Enable pin : 1.6
+ *                     BIT7); // Clock pin  : 1.7
+ *
+ *   3. Enable the ShiftBrite:
  *
  *     shiftbrite_enable(&sb);
  *
- *   3. For each module in the chain, call 'shiftbrite_rgb()', to
+ *   4. For each module in the chain, call 'shiftbrite_rgb()', to
  *   load the data into the module. Each call will shift all the
  *   values to the next module in the chain (a FIFO queue), so you
  *   need to load the values of the furthest module first.
@@ -52,13 +55,13 @@
  *     shiftbrite_rgb(&sb, 0, 1023, 0); // Set middle to GREEN
  *     shiftbrite_rgb(&sb, 0, 0, 1023); // Set closest to BLUE
  *
- *   4. 'Latch' the data. This sends a signal to each ShiftBrite
+ *   5. 'Latch' the data. This sends a signal to each ShiftBrite
  *   that the data has been fully loaded and they should update
  *   the LEDs to the new values.
  *
  *     shiftbrite_latch(&sb);
  *
- *   5. Yay! Light!
+ *   6. Yay! Light!
  *
  * Other things you should know:
  *
@@ -79,17 +82,20 @@ extern "C" {
 
 typedef struct {
   char data_pin;
-  char clock_pin;
   char latch_pin;
   char enable_pin;
+  char clock_pin;
 } shiftbrite;
 
 /**
- * Should be called at startup, after the pins have been set
- * on the shiftbrite struct. This will configure the pins
+ * Should be called once at startup, to configure the pins
  * on the controller.
  */
-void shiftbrite_init(shiftbrite *sb);
+void shiftbrite_init(shiftbrite *sb,
+                     char data_pin,
+                     char latch_pin,
+                     char enable_pin,
+                     char clock_pin);
 
 /**
  * See shiftbrite_configure().
@@ -175,19 +181,18 @@ public:
 
   shiftbrite sb;
 
-  ShiftBrite(shiftbrite sb) : sb(sb) {
-    shiftbrite_init(&sb);
-  }
+  ShiftBrite() {}
 
-  ShiftBrite(char data_pin,
-             char clock_pin,
-             char latch_pin,
-             char enable_pin) {
-    sb.data_pin   = data_pin;
-    sb.clock_pin  = clock_pin;
-    sb.latch_pin  = latch_pin;
-    sb.enable_pin = enable_pin;
-    shiftbrite_init(&sb);
+  /** See shiftbrite_init() */
+  void init(char data_pin,
+            char latch_pin,
+            char enable_pin,
+            char clock_pin) {
+    shiftbrite_init(&sb,
+                    data_pin,
+                    latch_pin,
+                    enable_pin,
+                    clock_pin);
   }
 
   /** See shiftbrite_configure() */

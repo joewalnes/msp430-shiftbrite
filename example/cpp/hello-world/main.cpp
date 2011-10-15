@@ -20,14 +20,17 @@
  *
  * Joe Walnes <joe@walnes.com>
  */
+
+ShiftBrite sb;
+
 int main() {
   WDTCTL = WDTPW + WDTHOLD; // Stop watchdog timer. Standard MSP430 setup.
 
   // Configure MSP430 pins
-  ShiftBrite sb(BIT4,  // Data pin 1.4
-                BIT5,  // Latch pin 1.5
-                BIT6,  // Enable pin 1.6
-                BIT7); // Clock pin: 1.7
+  sb.init(BIT4,  // Data pin   : 1.4
+          BIT5,  // Latch pin  : 1.5
+          BIT6,  // Enable pin : 1.6
+          BIT7); // Clock pin  : 1.7
 
   // At startup, the module is disabled. Enable it.
   sb.enable();
@@ -36,7 +39,7 @@ int main() {
   // This is for a single module - if there were more modules
   // chained together, this should be called for each module
   // with the appropriate color.
-  sb.rgb(0, 1023, 0); // Green
+  sb.rgb(0, 0, 1023); // Blue
 
   // Signal ShiftBrite module(s) we're done loading data.
   // This will make the LEDs light the appropriate color(s).
@@ -44,4 +47,4 @@ int main() {
 
   for(;;) { /* spin forever */ }
 }
- 
+
