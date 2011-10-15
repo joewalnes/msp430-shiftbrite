@@ -47,16 +47,6 @@ Usage
                     BIT6,  // Enable pin : 1.6
                     BIT7); // Clock pin  : 1.7
 
-2) Create a `shiftbrite` struct, set which pins the first
-module in the chain is connected to and call `shiftbrite_init()`.
-
-    shiftbrite sb;
-    sb.data_pin   = BIT4; // Pin 1.4
-    sb.latch_pin  = BIT5; // Pin 1.5
-    sb.enable_pin = BIT6; // Pin 1.6
-    sb.clock_pin  = BIT7; // Pin 1.7
-    shiftbrite_init(&sb); // Setup MSP430 pins
-
 3) Enable the ShiftBrite:
 
     shiftbrite_enable(&sb);
