@@ -11,6 +11,8 @@ multiple ShiftBrites.
 Quick Start
 ===========
 
+[Download](https://github.com/joewalnes/msp430-shiftbrite/zipball/master)
+
 Include [shiftbrite.c](https://github.com/joewalnes/msp430-shiftbrite/blob/master/shiftbrite.c)
 and [shiftbrite.h](https://github.com/joewalnes/msp430-shiftbrite/blob/master/shiftbrite.h) in your project.
 
