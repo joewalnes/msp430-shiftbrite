@@ -1,7 +1,7 @@
 MSP430 ShiftBrite Library
 =========================
 
-A small C library that makes it easy to use the Texas Instruments [MSP430](http://www.ti.com/lsds/ti/microcontroller/16-bit_msp430/overview.page)
+A small C (and C++) library that makes it easy to use the Texas Instruments [MSP430](http://www.ti.com/lsds/ti/microcontroller/16-bit_msp430/overview.page)
 microcontroller with the
 [ShiftBrite](http://docs.macetech.com/doku.php/shiftbrite) RGB LED module.
 
@@ -11,7 +11,8 @@ multiple ShiftBrites.
 Quick Start
 ===========
 
-Include `shiftbrite.c` and `shiftbrite.h` in your project.
+Include [shiftbrite.c](https://github.com/joewalnes/msp430-shiftbrite/blob/master/shiftbrite.c)
+and [shiftbrite.h](https://github.com/joewalnes/msp430-shiftbrite/blob/master/shiftbrite.h) in your project.
 
 Wiring
 ------
@@ -32,11 +33,11 @@ Multiple ShiftBrites can be chained together by connecting the
 Usage
 -----
 
-1. Allocate a global `shiftbrite` struct.
+1) Allocate a global `shiftbrite` struct.
 
     shiftbrite sb;
 
-2. At startup, call `shiftbrite_init()` function, passing in which pins the first  module in the chain is connected to.
+2) At startup, call `shiftbrite_init()` function, passing in which pins the first  module in the chain is connected to.
 
     shiftbrite_init(&sb,
                     BIT4,  // Data pin   : 1.4
@@ -44,7 +45,7 @@ Usage
                     BIT6,  // Enable pin : 1.6
                     BIT7); // Clock pin  : 1.7
 
-2. Create a `shiftbrite` struct, set which pins the first
+2) Create a `shiftbrite` struct, set which pins the first
 module in the chain is connected to and call `shiftbrite_init()`.
 
     shiftbrite sb;
@@ -54,11 +55,11 @@ module in the chain is connected to and call `shiftbrite_init()`.
     sb.clock_pin  = BIT7; // Pin 1.7
     shiftbrite_init(&sb); // Setup MSP430 pins
 
-3. Enable the ShiftBrite:
+3) Enable the ShiftBrite:
 
     shiftbrite_enable(&sb);
 
-4. For each module in the chain, call `shiftbrite_rgb()`, to
+4) For each module in the chain, call `shiftbrite_rgb()`, to
 load the data into the module. Each call will shift all the
 values to the next module in the chain (a FIFO queue), so you
 need to load the values of the furthest module first.
@@ -72,13 +73,13 @@ The RGB values should be in range 0-1023.
     shiftbrite_rgb(&sb, 0, 1023, 0); // Set middle to GREEN
     shiftbrite_rgb(&sb, 0, 0, 1023); // Set closest to BLUE
 
-5. 'Latch' the data. This sends a signal to each ShiftBrite
+5) 'Latch' the data. This sends a signal to each ShiftBrite
 that the data has been fully loaded and they should update
 the LEDs to the new values.
 
     shiftbrite_latch(&sb);
 
-6. Yay! Light!
+6) Yay! Light!
 
 Other things you should know:
 
@@ -90,10 +91,13 @@ Other things you should know:
     (i.e. turned on/off without having to reload the buffers).
     See `shiftbrite_enable()` / `shiftbrite_disable()`
 
-*   Plenty of docs in the header file, and check out the examples.
+*   Plenty of docs in the [header](https://github.com/joewalnes/msp430-shiftbrite/blob/master/shiftbrite.h)
+    file, and check out the
+    [examples](https://github.com/joewalnes/msp430-shiftbrite/tree/master/example).
 
 *   If you prefer C++, there's also a C++ wrapper to the C API.
-    See header and examples.
+    See [header](https://github.com/joewalnes/msp430-shiftbrite/blob/master/shiftbrite.h)
+    and [examples](https://github.com/joewalnes/msp430-shiftbrite/tree/master/example/cpp).
 
 Questions
 ---------
@@ -101,8 +105,9 @@ Questions
 **Q:** Can this be used with the [MSP430
 Launchpad](http://ti.com/launchpad)?
 
-**A:** Yes! See the examples directory for an example, complete with
-wiring. What a fine way to spend $4.30.
+**A:** Yes! See the [example](https://github.com/joewalnes/msp430-shiftbrite/tree/master/example)
+directory for an example, complete with wiring. What a fine way to spend
+$4.30.
 
 **Q:** Can this work directly with the [Allegro
 A6281](http://www.allegromicro.com/en/Products/Part_Numbers/6281/) LED
