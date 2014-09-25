@@ -6,5 +6,9 @@
   {
     "type": "git",
     "url": "https://github.com/joewalnes/msp430-shiftbrite.git"
-  }
+  },
+  "examples": [
+    "example/*/.c",
+    "example/*/.cpp"
+  ]
 }
