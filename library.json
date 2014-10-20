@@ -1,5 +1,5 @@
 {
-  "name": "MSP430-ShiftBrite",
+  "name": "ShiftBrite",
   "keywords": "rgb",
   "description": "C / C++ library to allow MSP430 microcontroller to talk to ShiftBrite RGB module",
   "repository":
@@ -10,5 +10,6 @@
   "examples": [
     "example/*/*/*.c",
     "example/*/*/*.cpp"
-  ]
+  ],
+  "platforms": "timsp430"
 }
